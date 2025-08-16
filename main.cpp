@@ -213,29 +213,28 @@ int main(void)
     glUseProgram(program);
     glUniform1i(glGetUniformLocation(program, "uCount"), count);
 
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-    const float ratio = width / (float) height;
-
-    glViewport(0, 0, width, height);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    mat4x4 m, p, mvp;
-    mat4x4_identity(m);
-    mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-    mat4x4_mul(mvp, p, m);
-
-    glUseProgram(program);
-    glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const float*)mvp);
-    glUniform2f(locRes, (float)width, (float)height);
-
-    glBindVertexArray(vertex_array);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-
     while (!glfwWindowShouldClose(window))
     {
+		int width, height;
+		glfwGetFramebufferSize(window, &width, &height);
+		const float ratio = width / (float) height;
+
+		glViewport(0, 0, width, height);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		mat4x4 m, p, mvp;
+		mat4x4_identity(m);
+		mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+		mat4x4_mul(mvp, p, m);
+
+		glUseProgram(program);
+		glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const float*)mvp);
+		glUniform2f(locRes, (float)width, (float)height);
+
+		glBindVertexArray(vertex_array);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
