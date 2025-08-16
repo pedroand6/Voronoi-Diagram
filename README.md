@@ -13,11 +13,11 @@ To compile the project using GCC, run the following command in the project direc
 
 `gcc -pthread -o main main.cpp -lglfw -lGL -lglad`
 
-Make sure you have the required libraries (`glfw`, `GL`, `glad`) installed on your system.
+Make sure you have the required libraries (`glfw`, `glad`) installed on your system.
 
 ## Example Output
 
-![alt text](./Results/voronoi_example.png)
+![screenshot](Results/screenshot.png)
 
 ## References
 
